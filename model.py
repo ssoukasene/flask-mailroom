@@ -1,6 +1,6 @@
 import os
 
-from peewee import Model, CharField, IntegerField, ForeignKeyField
+from peewee import Model, CharField, DoubleField, ForeignKeyField, DoesNotExist
 from playhouse.db_url import connect
 
 db = connect(os.environ.get('DATABASE_URL', 'sqlite:///my_database.db'))
@@ -12,7 +12,7 @@ class Donor(Model):
         database = db
 
 class Donation(Model):
-    value = IntegerField()
+    value = DoubleField()
     donor = ForeignKeyField(Donor, backref='donations')
 
     class Meta:
